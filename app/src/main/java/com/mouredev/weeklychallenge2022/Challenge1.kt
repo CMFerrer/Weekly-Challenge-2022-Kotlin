@@ -20,7 +20,9 @@ package com.mouredev.weeklychallenge2022
  *
  */
 
-fun main() {
+// Solution
+
+/*fun main() {
     println(isAnagram("amor", "roma"))
 }
 
@@ -29,4 +31,58 @@ private fun isAnagram(wordOne: String, wordTwo: String): Boolean {
         return false
     }
     return wordOne.lowercase().toCharArray().sortedArray().contentEquals(wordTwo.lowercase().toCharArray().sortedArray())
+}*/
+
+// My solution
+
+fun main() {
+    println(if (isAnAnagram("Pagar", "praga")) "Is an anagram" else "Is not an anagram")
+
+}
+
+fun isAnAnagram(firstWord: String, secondWord: String): Boolean {
+
+    if (firstWord.length != secondWord.length || firstWord.lowercase() == secondWord.lowercase()) return false
+
+    val lettersFirstWord = mutableMapOf<Char, Int>()
+    val lettersSecondWord = mutableMapOf<Char, Int>()
+
+    /*firstWord.lowercase().forEach {
+
+        if (lettersFirstWord.contains(it)) {
+            lettersFirstWord[it] = lettersFirstWord[it]!! + 1
+        } else {
+            lettersFirstWord[it] = 1
+        }
+    }
+
+    secondWord.lowercase().forEach {
+
+        if (lettersSecondWord.contains(it)) {
+            lettersSecondWord[it] = lettersSecondWord[it]!! + 1
+        } else {
+            lettersSecondWord[it] = 1
+        }
+    }*/
+
+    firstWord.lowercase().zip(secondWord.lowercase()).forEach {
+
+        if (lettersFirstWord.contains(it.component1())) {
+            lettersFirstWord[it.component1()] = lettersFirstWord[it.component1()]!! + 1
+        } else {
+            lettersFirstWord[it.component1()] = 1
+        }
+
+        if (lettersSecondWord.contains(it.component2())) {
+            lettersSecondWord[it.component2()] = lettersSecondWord[it.component2()]!! + 1
+        } else {
+            lettersSecondWord[it.component2()] = 1
+        }
+    }
+
+    println(lettersFirstWord)
+    println(lettersSecondWord)
+
+    return lettersFirstWord == lettersSecondWord
+
 }
